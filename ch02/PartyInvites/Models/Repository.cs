@@ -13,9 +13,9 @@ namespace PartyInvites.Models
         {
             responses = new Dictionary<string, GuestResponse>()
             {
-                { "Bob", new GuestResponse { Name = "bob", Email = "bob@example.com", WillAttend = true } },
-                { "Alice", new GuestResponse { Name = "alice", Email = "alice@example.com", WillAttend = true } },
-                { "Paul", new GuestResponse { Name = "paul", Email = "paul@example.com", WillAttend = true } },
+                { "Bob", new GuestResponse { Name = "Bob", Email = "bob@example.com", WillAttend = true } },
+                { "Alice", new GuestResponse { Name = "Alice", Email = "alice@example.com", WillAttend = true } },
+                { "Paul", new GuestResponse { Name = "Paul", Email = "paul@example.com", WillAttend = true } },
             };
          }
 

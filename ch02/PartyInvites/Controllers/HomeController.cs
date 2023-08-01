@@ -14,13 +14,14 @@ namespace PartyInvites.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Rsvp()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Rsv(GuestResponse response)
+        public ActionResult Rsvp(GuestResponse response)
         {
             if (ModelState.IsValid)
             {
