@@ -1,0 +1,31 @@
+﻿@model PartyInvites.Models.GuestResponse
+
+@{
+    ViewBag.Title = "Rsvp";
+}
+
+<div class="card">
+	<div class="card-title bg-primary text-light"><h4>RSVP</h4></div>
+	<div class="card-body">
+		@using (Html.BeginForm())
+		{
+			<div class="mb-3">
+				<label>Your name:</label>
+				@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+			</div>
+			<div class="mb-3">
+				<label>Your email:</label>
+				@Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+			</div>
+			<div class="mb-3">
+				<label>Will you attend?</label>
+				@Html.DropDownListFor(x => x.WillAttend,
+					new[]
+					{
+						new SelectListItem() { Text = "Yes, I'll be there", Value = bool.TrueString },
+						new SelectListItem() { Text = "No, I can't come", Value = bool.TrueString },
+					}, "Choose an option", new { @class = "form-control" } )
+			</div>
+		}
+	</div>
+</div>
