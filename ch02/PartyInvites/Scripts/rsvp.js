@@ -31,10 +31,10 @@ var getAttendees = function () {
 		type: "GET",
 		success: function (data) {
 			model.attendees.removeAll();
-			model.attendees.push.apply.model.attendees, data.map(function (rsvp) {
+			model.attendees.push.apply(model.attendees, data.map(function (rsvp) {
 				return rsvp.Name;
-			});
-			model.view("Thanks");
+			}));
+			model.view("thanks");
 		}
 	})
 }

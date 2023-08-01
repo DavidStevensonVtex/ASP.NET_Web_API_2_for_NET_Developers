@@ -9,11 +9,12 @@
 </head>
 <body class="container">
 
-    @RenderBody()
+	@RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
 	<script src="~/Scripts/knockout-3.5.1.js"></script>
+	<script src="~/Scripts/rsvp.js"></script>
 </body>
 </html>
