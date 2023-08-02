@@ -39,5 +39,11 @@ namespace Primer.Controllers
                 return (long)results.Average();
             });
         }
-    }
+
+		public Task PostUrl(string newUrl, CancellationToken cToken)
+		{
+            TargetUrl = newUrl;
+            return Task.FromResult<object>(null);
+		}
+	}
 }
