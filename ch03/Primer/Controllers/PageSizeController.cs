@@ -1,14 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace Primer.Controllers
 {
-    public class PageSizeController : Controller
+	public class PageSizeController : ApiController
     {
         private static string TargetUrl = "http://apress.com";
 
