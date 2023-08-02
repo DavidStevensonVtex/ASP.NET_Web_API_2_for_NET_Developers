@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,9 +17,25 @@ namespace Primer.Controllers
 		{
             WebClient wc = new WebClient();
             Stopwatch sw = Stopwatch.StartNew();
-            byte[] apressData = await wc.DownloadDataTaskAsync(TargetUrl);
+            List<long> results = new List<long>();
+
+            for ( int i = 0; i < 10; i++ )
+			{
+                if (!cToken.IsCancellationRequested)
+				{
+                    Debug.WriteLine($"Making Request: {i}");
+                    byte[] apressData = await wc.DownloadDataTaskAsync(TargetUrl);
+                    results.Add(apressData.Length);
+                }
+                else
+				{
+                    Debug.WriteLine("Cancelled");
+                    return 0;
+				}
+            }
+
             Debug.WriteLine($"Elapsed ms: {sw.ElapsedMilliseconds} milliseconds.");
-            return apressData.LongLength;
+            return (long)results.Average();
         }
     }
 }
