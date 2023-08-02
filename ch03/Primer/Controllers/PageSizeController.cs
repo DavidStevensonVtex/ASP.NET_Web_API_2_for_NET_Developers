@@ -13,31 +13,13 @@ namespace Primer.Controllers
     {
         private static string TargetUrl = "http://apress.com";
 
-        public Task<long> GetPageSize(CancellationToken cToken)
+        public async Task<long> GetPageSize(CancellationToken cToken)
 		{
-            return Task<long>.Factory.StartNew(() =>
-            {
-                WebClient wc = new WebClient();
-                Stopwatch sw = Stopwatch.StartNew();
-                List<long> results = new List<long>();
-
-                for (int i = 0; i < 10; i++)
-                {
-                    if (!cToken.IsCancellationRequested)
-                    {
-                        Debug.WriteLine($"Making Request: {i}");
-                        results.Add(wc.DownloadData(TargetUrl).LongLength);
-                    }
-                    else
-                    {
-                        Debug.WriteLine("Cancelled");
-                        return 0;
-                    }
-                }
-
-                Debug.WriteLine($"Elapsed ms: {sw.ElapsedMilliseconds} milliseconds.");
-                return (long)results.Average();
-            });
+            WebClient wc = new WebClient();
+            Stopwatch sw = Stopwatch.StartNew();
+            byte[]apressData = await wc.DownloadDataTaskAsync(TargetUrl);
+            Debug.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}");
+            return apressData.LongLength;
         }
 
 		public Task PostUrl(string newUrl, CancellationToken cToken)
