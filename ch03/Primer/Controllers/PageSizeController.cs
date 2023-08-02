@@ -13,29 +13,31 @@ namespace Primer.Controllers
     {
         private static string TargetUrl = "http://apress.com";
 
-        public async Task<long> GetPageSize(CancellationToken cToken)
+        public Task<long> GetPageSize(CancellationToken cToken)
 		{
-            WebClient wc = new WebClient();
-            Stopwatch sw = Stopwatch.StartNew();
-            List<long> results = new List<long>();
+            return Task<long>.Factory.StartNew(() =>
+            {
+                WebClient wc = new WebClient();
+                Stopwatch sw = Stopwatch.StartNew();
+                List<long> results = new List<long>();
 
-            for ( int i = 0; i < 10; i++ )
-			{
-                if (!cToken.IsCancellationRequested)
-				{
-                    Debug.WriteLine($"Making Request: {i}");
-                    byte[] apressData = await wc.DownloadDataTaskAsync(TargetUrl);
-                    results.Add(apressData.Length);
+                for (int i = 0; i < 10; i++)
+                {
+                    if (!cToken.IsCancellationRequested)
+                    {
+                        Debug.WriteLine($"Making Request: {i}");
+                        results.Add(wc.DownloadData(TargetUrl).LongLength);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Cancelled");
+                        return 0;
+                    }
                 }
-                else
-				{
-                    Debug.WriteLine("Cancelled");
-                    return 0;
-				}
-            }
 
-            Debug.WriteLine($"Elapsed ms: {sw.ElapsedMilliseconds} milliseconds.");
-            return (long)results.Average();
+                Debug.WriteLine($"Elapsed ms: {sw.ElapsedMilliseconds} milliseconds.");
+                return (long)results.Average();
+            });
         }
     }
 }
