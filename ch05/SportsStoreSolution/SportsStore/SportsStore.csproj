@@ -176,6 +176,7 @@
     </Compile>
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="Infrastructure\Identity\StoreIdentityDbContext.cs" />
+    <Compile Include="Infrastructure\Identity\StoreIdentityDbInitializer.cs" />
     <Compile Include="Infrastructure\Identity\StoreRole.cs" />
     <Compile Include="Infrastructure\Identity\StoreUser.cs" />
     <Compile Include="Models\IRepository.cs" />
