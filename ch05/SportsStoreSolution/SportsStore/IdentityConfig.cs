@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-//[assembly: OwinStartup(SportsStore.IdentityConfig)]
+[assembly: OwinStartup(typeof(SportsStore.IdentityConfig))]
 
 namespace SportsStore
 {
