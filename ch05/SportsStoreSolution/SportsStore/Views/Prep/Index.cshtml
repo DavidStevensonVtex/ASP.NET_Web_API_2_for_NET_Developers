@@ -14,3 +14,14 @@
 			}
 	</table>
 </div>
+
+@using (Html.BeginForm("SaveProduct", "Prep"))
+{
+	<input type="hidden" name="Name" value="Zippy Running Shoes" />
+	<input type="hidden" name="Category" value="Running" />
+	<input type="hidden" name="Description" value="Set a new Record Time" />
+	<input type="hidden" name="Price" value="159.99" />
+
+	<button class="btn btn-primary" type="submit">Create</button>
+	<a href="/prep/deleteproduct/2" class="btn btn-primary">Delete</a>
+}
