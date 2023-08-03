@@ -41,3 +41,18 @@
 		}
 	</table>
 </div>
+
+@using (Html.BeginForm("SaveOrder", "Prep"))
+{
+	<input type="hidden" name="Customer" value="John Poet" />
+	<input type="hidden" name="TotalCost" value="91" />
+
+	<input type="hidden" name="lines[0].productid" value="6" />
+	<input type="hidden" name="lines[0].count" value="1" />
+
+	<input type="hidden" name="lines[1].productid" value="8" />
+	<input type="hidden" name="lines[1].count" value="1" />
+
+	<button class="btn btn-primary" type="submit">Create</button>
+	<a href="/prep/deleteorder/2" class="btn btn-primary">Delete</a>
+}
