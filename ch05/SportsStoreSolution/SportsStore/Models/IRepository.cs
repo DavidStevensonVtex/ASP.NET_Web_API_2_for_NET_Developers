@@ -10,7 +10,7 @@ namespace SportsStore.Models
 		Task<Product> DeleteProductAsync(int productID);
 
 		IEnumerable<Order> Orders { get; }
-		Task<int> DeleteProductAsync(Order order);
+		Task<int> SaveOrderAsync(Order order);
 		Task<Order> DeleteOrderAsync(int orderID);
 	}
 }
