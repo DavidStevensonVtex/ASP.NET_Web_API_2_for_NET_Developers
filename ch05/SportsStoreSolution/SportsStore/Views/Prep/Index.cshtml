@@ -1,0 +1,16 @@
+﻿@using System.Collections
+@using SportsStore.Models
+@model IEnumerable<Product>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Products</div>
+	<table class="table table-striped">
+		<tr><th>ID</th><th>Name</th><th>Category</th><th>Price</th></tr>
+		@foreach ( var p in Model)
+			{
+				<tr>
+					<td>@p.Id</td><td>@p.Name</td><td>@p.Category</td><td>@p.Price.ToString("C")</td>
+				</tr>
+			}
+	</table>
+</div>
