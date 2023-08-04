@@ -9,7 +9,7 @@ namespace SportsStore.Infrastructure.Identity
 {
 	public class StoreIdentityDbInitializer : CreateDatabaseIfNotExists<StoreIdentityDbContext>
 	{
-		protected override void Seed ( StoreIdentityDbContext context )
+		protected async override void Seed ( StoreIdentityDbContext context )
 		{
 			StoreUserManager userMgr = new StoreUserManager(new UserStore<StoreUser>(context));
 			StoreRoleManager roleMgr = new StoreRoleManager(new RoleStore<StoreRole>(context));
@@ -19,21 +19,21 @@ namespace SportsStore.Infrastructure.Identity
 			string password = "secret";
 			string email = "admin@example.com";
 
-			if (!roleMgr.RoleExists(roleName))
+			if (!await roleMgr.RoleExistsAsync(roleName))
 			{
-				roleMgr.Create(new StoreRole(roleName));
+				await roleMgr.CreateAsync(new StoreRole(roleName));
 			}
 
-			StoreUser user = userMgr.FindByName(userName);
+			StoreUser user = await userMgr.FindByNameAsync(userName);
 			if (user == null)
 			{
-				userMgr.Create(new StoreUser { UserName = userName, Email = email }, password);
-				user = userMgr.FindByName(userName);
+				await userMgr.CreateAsync(new StoreUser { UserName = userName, Email = email }, password);
+				user = await userMgr.FindByNameAsync(userName);
 			}
 
-			if (! userMgr.IsInRole(user.Id, roleName))
+			if (! await userMgr.IsInRoleAsync(user.Id, roleName))
 			{
-				userMgr.AddToRole(user.Id, roleName);
+				await userMgr.AddToRoleAsync(user.Id, roleName);
 			}
 
 			base.Seed(context);
