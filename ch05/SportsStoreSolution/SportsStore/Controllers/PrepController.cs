@@ -61,8 +61,8 @@ namespace SportsStore.Controllers
             StoreUserManager userMgr = HttpContext.GetOwinContext().GetUserManager<StoreUserManager>();
 
             StoreUser user = await userMgr.FindAsync("Admin", "secret");
-            authMgr.SignIn(await userMgr.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
-            return RedirectToAction("Index");
+			//authMgr.SignIn(await userMgr.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
+			return RedirectToAction("Index");
         }
 
         public ActionResult SignOut()

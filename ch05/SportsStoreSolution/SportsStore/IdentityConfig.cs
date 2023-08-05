@@ -8,7 +8,6 @@ using SportsStore.Infrastructure.Identity;
 
 namespace SportsStore
 {
-
     public class IdentityConfig
 	{
 		public void Configuration(IAppBuilder app) 

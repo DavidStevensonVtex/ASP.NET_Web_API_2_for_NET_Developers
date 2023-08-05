@@ -19,7 +19,6 @@ namespace SportsStore.Infrastructure.Identity
             string password = "secret";
             string email = "admin@example.com";
 
-            //await userMgr.CreateAsync(new StoreUser { UserName = userName, Email = email }, password);
             if (!roleMgr.RoleExistsAsync(roleName).Result)
             {
                 roleMgr.CreateAsync(new StoreRole(roleName)).Wait();
@@ -32,10 +31,10 @@ namespace SportsStore.Infrastructure.Identity
                 user = userMgr.FindByNameAsync(userName).Result;
             }
 
-            if (!userMgr.IsInRoleAsync(user.Id, roleName).Result)
-            {
-                userMgr.AddToRoleAsync(user.Id, roleName).Wait();
-            }
+            //if (!userMgr.IsInRoleAsync(user.Id, roleName).Result)
+            //{
+            //    userMgr.AddToRoleAsync(user.Id, roleName).Wait();
+            //}
 
             base.Seed(context);
         }
