@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace SportsStore.Infrastructure.Identity
 {
-	public class StoreIdentityDbContext : IdentityDbContext
+	public class StoreIdentityDbContext : IdentityDbContext<StoreUser, StoreRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
 	{
 		public StoreIdentityDbContext () : base("SportsStoreIdentityDb")
 		{
@@ -14,5 +14,5 @@ namespace SportsStore.Infrastructure.Identity
 		{
 			return new StoreIdentityDbContext();
 		}
-	}
+    }
 }

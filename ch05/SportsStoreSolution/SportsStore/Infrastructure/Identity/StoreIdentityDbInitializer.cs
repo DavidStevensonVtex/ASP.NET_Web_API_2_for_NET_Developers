@@ -9,34 +9,35 @@ namespace SportsStore.Infrastructure.Identity
 {
 	public class StoreIdentityDbInitializer : CreateDatabaseIfNotExists<StoreIdentityDbContext>
 	{
-		protected async override void Seed ( StoreIdentityDbContext context )
+		protected override void Seed ( StoreIdentityDbContext context )
 		{
-			StoreUserManager userMgr = new StoreUserManager(new UserStore<StoreUser>(context));
+            StoreUserManager userMgr = new StoreUserManager(new UserStore<StoreUser>(context));
 			StoreRoleManager roleMgr = new StoreRoleManager(new RoleStore<StoreRole>(context));
 
-			string roleName = "Administrators";
-			string userName = "Admin";
-			string password = "secret";
-			string email = "admin@example.com";
+            string roleName = "Administrators";
+            string userName = "Admin";
+            string password = "secret";
+            string email = "admin@example.com";
 
-			if (!await roleMgr.RoleExistsAsync(roleName))
-			{
-				await roleMgr.CreateAsync(new StoreRole(roleName));
-			}
+            //await userMgr.CreateAsync(new StoreUser { UserName = userName, Email = email }, password);
+            if (!roleMgr.RoleExistsAsync(roleName).Result)
+            {
+                roleMgr.CreateAsync(new StoreRole(roleName)).Wait();
+            }
 
-			StoreUser user = await userMgr.FindByNameAsync(userName);
-			if (user == null)
-			{
-				await userMgr.CreateAsync(new StoreUser { UserName = userName, Email = email }, password);
-				user = await userMgr.FindByNameAsync(userName);
-			}
+            StoreUser user = userMgr.FindByNameAsync(userName).Result;
+            if (user == null)
+            {
+                userMgr.CreateAsync(new StoreUser { UserName = userName, Email = email }, password).Wait();
+                user = userMgr.FindByNameAsync(userName).Result;
+            }
 
-			if (! await userMgr.IsInRoleAsync(user.Id, roleName))
-			{
-				await userMgr.AddToRoleAsync(user.Id, roleName);
-			}
+            if (!userMgr.IsInRoleAsync(user.Id, roleName).Result)
+            {
+                userMgr.AddToRoleAsync(user.Id, roleName).Wait();
+            }
 
-			base.Seed(context);
-		}
-	}
+            base.Seed(context);
+        }
+    }
 }
