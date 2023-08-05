@@ -4,7 +4,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using SportsStore.Infrastructure.Identity;
 
-[assembly: OwinStartup(typeof(SportsStore.IdentityConfig))]
+[assembly:OwinStartup(typeof(SportsStore.IdentityConfig))]
 
 namespace SportsStore
 {
