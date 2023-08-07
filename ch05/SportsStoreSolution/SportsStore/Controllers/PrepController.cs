@@ -7,6 +7,7 @@ using System.Web;
 using System.Security.Claims;
 using SportsStore.Models;
 using SportsStore.Infrastructure.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace SportsStore.Controllers
 {
@@ -58,11 +59,16 @@ namespace SportsStore.Controllers
         public async Task<ActionResult> SignIn ()
         {
             IAuthenticationManager authMgr = HttpContext.GetOwinContext().Authentication;
-            StoreUserManager userMgr = HttpContext.GetOwinContext().GetUserManager<StoreUserManager>();
+            //UserManager<IdentityUser> userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
+            using (StoreIdentityDbContext context = new StoreIdentityDbContext())
+			{
+                UserStore<IdentityUser> userStore = new UserStore<IdentityUser>(context);
+                UserManager<IdentityUser> userMgr = new UserManager<IdentityUser>(userStore);
 
-            StoreUser user = await userMgr.FindAsync("Admin", "secret");
-			//authMgr.SignIn(await userMgr.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
-			return RedirectToAction("Index");
+                IdentityUser user = await userMgr.FindAsync("Admin", "secret");
+                authMgr.SignIn(await userMgr.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult SignOut()
