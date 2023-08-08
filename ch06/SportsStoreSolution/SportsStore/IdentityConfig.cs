@@ -23,12 +23,12 @@ namespace SportsStore
 			//	AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
 			//});
 
-			app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions
-			{
-				Provider = new StoreAuthProvider(),
-				AllowInsecureHttp = true,
-				TokenEndpointPath = new PathString("/Authenticate")
-			});
+			//app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions
+			//{
+			//	Provider = new StoreAuthProvider(),
+			//	AllowInsecureHttp = true,
+			//	TokenEndpointPath = new PathString("/Authenticate")
+			//});
 		}
 	}
 }
