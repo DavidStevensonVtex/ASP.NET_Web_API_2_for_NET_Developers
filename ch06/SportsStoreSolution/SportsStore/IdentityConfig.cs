@@ -27,7 +27,7 @@ namespace SportsStore
 			{
 				Provider = new StoreAuthProvider(),
 				AllowInsecureHttp = true,
-				TokenEndpointPath = new PathString("Authenticate")
+				TokenEndpointPath = new PathString("/Authenticate")
 			});
 		}
 	}
