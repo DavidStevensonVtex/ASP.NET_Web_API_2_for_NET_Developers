@@ -23,7 +23,15 @@ namespace SportsStore.Controllers
 		}
         public Product GetProduct ( int id)
 		{
-            return Repository.Products.FirstOrDefault(p => p.Id == id);
+            Product result = Repository.Products.FirstOrDefault(p => p.Id == id);
+            if (result == null)
+			{
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+			}
+            else
+			{
+                return result;
+			}
 		}
 
         public async Task PostProduct(Product product)
