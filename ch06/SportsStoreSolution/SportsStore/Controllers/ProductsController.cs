@@ -28,9 +28,17 @@ namespace SportsStore.Controllers
             return result == null ? (IHttpActionResult)BadRequest("No product found") : Ok(result);
 		}
 
-        public async Task PostProduct(Product product)
+        public async Task<IHttpActionResult> PostProduct(Product product)
 		{
-            await Repository.SaveProductAsync(product);
+            if(ModelState.IsValid)
+			{
+                await Repository.SaveProductAsync(product);
+                return Ok();
+			}
+            else
+			{
+                return BadRequest(ModelState);
+			}
 		}
 
         [Authorize(Roles = "Administrators")]
