@@ -176,6 +176,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IdentityConfig.cs" />
+    <Compile Include="Infrastructure\Identity\StoreAuthProvider.cs" />
     <Compile Include="Infrastructure\Identity\StoreIdentityManager.cs" />
     <Compile Include="Infrastructure\Identity\StoreIdentityDbContext.cs" />
     <Compile Include="Infrastructure\Identity\StoreIdentityDbInitializer.cs" />
